@@ -1,0 +1,28 @@
+<% provide(:title, 'Leaderboard') %>
+
+<div class='leaderboard'>
+  <%	if params[:id] == '1' %>
+      <h1><span><%=	@category.name %> Leader Board</span></h1>
+  <% elsif params[:id] == '2' %>
+      <h1><span><%=	@subcategory.name %> Leader Board</span></h1>
+  <% elsif params[:id] == '3' %>
+      <h1><span><%=	@quiz.name %> Leader Board</span></h1>
+  <% end %>
+  <div class="content">
+    <ul>
+      <li style="font-size: 1.5em">
+        <span class="name">User</span>
+        <span class="count">Score</span>
+      </li>
+      <% @scoreboards.each do |scoreboard| %>
+          <li>
+            <span class="name">
+              <%= gravatar_for scoreboard.user, size: 40 %>
+              <%= link_to scoreboard.user.name, scoreboard.user %>
+            </span>
+            <span class="count"><%= scoreboard.total %></span>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

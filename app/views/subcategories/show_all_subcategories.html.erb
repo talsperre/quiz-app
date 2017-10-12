@@ -1,0 +1,29 @@
+<% provide(:title, 'Subcategories') %>
+<h1 class="text-center">Subcategories</h1>
+
+<table class="table table-striped table-hover ">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Subcategory Name</th>
+    <th>Quizzes</th>
+    <% if current_user.admin? %>
+        <th>Delete</th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <%= ctr = 0 %>
+  <% @subcategories.each do |subcategory| %>
+      <tr>
+        <td><%= ctr + 1 %></td>
+        <td><%=	 subcategory.name %></td>
+        <td><%=	 link_to "Quizzes", show_all_quizzes_path(subcategory.id) %></td>
+        <% if current_user.admin? %>
+            <td><%=	 link_to "Delete", subcategory, method: :delete, data: { confirm: "Are you sure?" } %></td>
+        <% end %>
+      </tr>
+      <%=	 ctr = ctr + 1 %>
+  <% end %>
+  </tbody>
+</table>

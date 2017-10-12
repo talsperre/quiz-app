@@ -1,0 +1,186 @@
+<% provide(:title, @user.name) %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <%= image_tag("https://www.gravatar.com/avatar/#{Digest::MD5::hexdigest(@user.email.downcase)}.png?d=monsterid&s=300",
+                      alt: @user.name, :style => "width: 100%;") %>
+        <h1><%= @user.name %></h1>
+        <p class="title">
+          <%= @user.email %>
+        </p>
+        <p class="title">
+          Rating: <%= show_score @user %>
+        </p>
+        <p><%= @user.gender %></p>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Quiz Name</th>
+          <th>Subcategory Name</th>
+          <th>Category Name</th>
+          <% if current_user == @user %>
+            <th>Play Again</th>
+          <% end %>
+          <th>Max Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= ctr = 0 %>
+        <% @scores.each do |score| %>
+            <tr>
+              <td><%= ctr + 1 %></td>
+              <p hidden><%= quiz = Quiz.find(score.quiz_id) %></p>
+              <td><%=	quiz.name %></td>
+              <td><%=	quiz.subcategory.name %></td>
+              <td><%=	quiz.subcategory.category.name %></td>
+              <% if current_user == @user %>
+                  <td><%=	link_to "Play Again", play_path(score.quiz_id) %></td>
+              <% end %>
+              <td><%=	score.total %></td>
+            </tr>
+            <%=	 ctr = ctr + 1 %>
+            <% if ctr == 10 %>
+              <% break %>
+            <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="hero-widget well well-sm">
+        <div class="icon">
+          <i class="glyphicon glyphicon-th-list"></i>
+        </div>
+        <div class="text">
+          <label class="text-muted">Categories</label>
+        </div>
+        <div class="options">
+          <%= link_to categories_path, class: "btn btn-primary btn-lg" do %>
+              <i class='glyphicon glyphicon-plus'></i> Categories
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="hero-widget well well-sm">
+        <div class="icon">
+          <i class="glyphicon glyphicon-list"></i>
+        </div>
+        <div class="text">
+          <label class="text-muted">Subcategories</label>
+        </div>
+        <div class="options">
+          <%= link_to subcategories_path, class: "btn btn-primary btn-lg" do %>
+              <i class='glyphicon glyphicon-plus'></i> Subcategories
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="hero-widget well well-sm">
+        <div class="icon">
+          <i class="glyphicon glyphicon-list-alt"></i>
+        </div>
+        <div class="text">
+          <label class="text-muted">Quizzes</label>
+        </div>
+        <div class="options">
+          <%= link_to quizzes_path, class: "btn btn-primary btn-lg" do %>
+              <i class='glyphicon glyphicon-plus'></i> Quizzes
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="hero-widget well well-sm">
+        <div class="icon">
+          <i class="glyphicon glyphicon-signal"></i>
+        </div>
+        <div class="text">
+          <label class="text-muted">Leaderboard</label>
+        </div>
+        <div class="options">
+          <%= link_to scoreboard_path, class: "btn btn-primary btn-lg" do %>
+              <i class='glyphicon glyphicon-plus'></i> Leaderboard
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% if current_user.admin? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="hero-widget well well-sm">
+            <div class="icon">
+              <i class="glyphicon glyphicon-log-in"></i>
+            </div>
+            <div class="text">
+              <label class="text-muted">Create Category</label>
+            </div>
+            <div class="options">
+              <%= link_to new_category_path, class: "btn btn-primary btn-lg" do %>
+                  <i class='glyphicon glyphicon-plus'></i> Category
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="hero-widget well well-sm">
+            <div class="icon">
+              <i class="glyphicon glyphicon-new-window"></i>
+            </div>
+            <div class="text">
+              <label class="text-muted">Create Subcategories</label>
+            </div>
+            <div class="options">
+              <%= link_to new_subcategory_path, class: "btn btn-primary btn-lg" do %>
+                  <i class='glyphicon glyphicon-plus'></i> Subcategories
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="hero-widget well well-sm">
+            <div class="icon">
+              <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            </div>
+            <div class="text">
+              <label class="text-muted">Create Quizzes</label>
+            </div>
+            <div class="options">
+              <%= link_to new_quiz_path, class: "btn btn-primary btn-lg" do %>
+                  <i class='glyphicon glyphicon-plus'></i> Quizzes
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="hero-widget well well-sm">
+            <div class="icon">
+              <i class="glyphicon glyphicon-tasks"></i>
+            </div>
+            <div class="text">
+              <label class="text-muted">View All Users</label>
+            </div>
+            <div class="options">
+              <%= link_to users_path, class: "btn btn-primary btn-lg" do %>
+                  <i class='glyphicon glyphicon-plus'></i> Users
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

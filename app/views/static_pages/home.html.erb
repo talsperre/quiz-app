@@ -1,0 +1,77 @@
+<% provide(:title, "Home") %>
+
+<div class="center jumbotron">
+  <h1>Welcome to QuizIt</h1>
+  <div class="row">
+    <div class="col-sm-7">
+      <%= image_tag 'home.png', class: "img-responsive", style: "float:left;" %>
+    </div>
+    <div class="col-sm-5">
+      <h2>The only authentic Quizzing portal in this world!!</h2>
+      <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="hero-widget well well-sm">
+        <div class="icon">
+          <i class="glyphicon glyphicon-th-list"></i>
+        </div>
+        <div class="text">
+          <label class="text-muted">Categories</label>
+        </div>
+        <div class="options">
+          <%= link_to categories_path, class: "btn btn-primary btn-lg" do %>
+              <i class='glyphicon glyphicon-plus'></i> Categories
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="hero-widget well well-sm">
+        <div class="icon">
+          <i class="glyphicon glyphicon-list"></i>
+        </div>
+        <div class="text">
+          <label class="text-muted">Subcategories</label>
+        </div>
+        <div class="options">
+          <%= link_to subcategories_path, class: "btn btn-primary btn-lg" do %>
+              <i class='glyphicon glyphicon-plus'></i> Subcategories
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="hero-widget well well-sm">
+        <div class="icon">
+          <i class="glyphicon glyphicon-list-alt"></i>
+        </div>
+        <div class="text">
+          <label class="text-muted">Quizzes</label>
+        </div>
+        <div class="options">
+          <%= link_to quizzes_path, class: "btn btn-primary btn-lg" do %>
+              <i class='glyphicon glyphicon-plus'></i> Quizzes
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="hero-widget well well-sm">
+        <div class="icon">
+          <i class="glyphicon glyphicon-signal"></i>
+        </div>
+        <div class="text">
+          <label class="text-muted">Leaderboard</label>
+        </div>
+        <div class="options">
+          <%= link_to scoreboard_path, class: "btn btn-primary btn-lg" do %>
+              <i class='glyphicon glyphicon-plus'></i> Leaderboard
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

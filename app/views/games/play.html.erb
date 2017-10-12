@@ -1,0 +1,83 @@
+<% provide(:title, 'Play Game') %>
+<h1 class="text-center">Question</h1>
+
+<% if @is_new %>
+    <h2>Score: <%= 0 %></h2>
+<% else %>
+    <h2>Score: <%= @state.score %></h2>
+<% end %>
+
+<%=	 form_for(:game, url: state_update_path, :html => {:class => 'form-horizontal'}) do |f| %>
+    <% if @question.qtype == "Image" %>
+        <p class="text-center">
+          <%= image_tag @im, style: "max-width: 400px; max-height:300px;" %>
+        </p>
+    <% end %>
+    <table class="table table-striped table-hover">
+      <thead style="font-size: 1.5em;">
+      <tr>
+        <th>#</th>
+        <th><%= @question.content %></th>
+      </tr>
+      </thead>
+      <tbody style="font-size: 1.2em;">
+      <tr>
+        <td>
+          <input type="checkbox" value="A" id="squaredOne" name="checkone" class="form-control">
+        </td>
+        <td>
+          <label for="squaredOne" class="form-control"><%=	 @question.option_one %></label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" value="B" id="squaredTwo" name="checktwo" class="form-control">
+        </td>
+        <td>
+          <label for="squaredTwo" class="form-control"><%=	 @question.option_two %></label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" value="C" id="squaredThree" name="checkthree" class="form-control">
+        </td>
+        <td>
+          <label for="squaredThree" class="form-control"><%=	 @question.option_three %></label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="checkbox" value="D" id="squaredFour" name="checkfour" class="form-control">
+        </td>
+        <td>
+          <label for="squaredFour" class="form-control"><%=	 @question.option_four %></label>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <input type="hidden" value="<%= @qzid %>" name="quiz_id">
+    <input type="hidden" value="<%= @question.id %>" name="question_id">
+    <input type="submit" class="btn btn-primary">
+    <br><br>
+<% end %>
+
+<%=	 form_with(url: show_two_options_path) do |f| %>
+    <input type="hidden" value="<%= params[:id] %>" name="quiz_id">
+    <input type="hidden" value="<%= @question.id %>" name="question_id">
+    <input type="submit" class="btn btn-primary" value="Get the Correct Options">
+<% end %>
+<br>
+<div class="well" id="fifty-fifty">
+
+</div>
+<br>
+
+<%=	 form_with(url: audience_poll_path) do |f| %>
+    <input type="hidden" value="<%= params[:id] %>" name="quiz_id">
+    <input type="hidden" value="<%= @question.id %>" name="question_id">
+    <input type="submit" class="btn btn-primary" value="Audience Poll">
+<% end %>
+<br>
+<div class="well" id="audience-poll">
+
+</div>

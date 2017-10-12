@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  is_quiz: false
+  quiz: one
+  is_subcategory: false
+  subcategory: one
+  is_category: false
+  category: one
+  total: 1
+
+two:
+  user: two
+  is_quiz: false
+  quiz: two
+  is_subcategory: false
+  subcategory: two
+  is_category: false
+  category: two
+  total: 1

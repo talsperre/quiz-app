@@ -1,0 +1,15 @@
+<% provide(:title, 'Edit Category') %>
+<h1 class="text-center">Edit Category</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%=	 form_for @category, :html => {:class => 'form-horizontal'} do |f| %>
+        <%=	 render 'shared/category_error_messages' %>
+        <%= f.label :name, class: 'control-label' %>
+        <%= f.text_field :name, class: 'form-control' %>
+        <br>
+
+        <%= f.submit "Edit category", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

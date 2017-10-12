@@ -1,0 +1,31 @@
+<% provide(:title, 'Quizzes') %>
+<h1 class="text-center">Quizzes</h1>
+
+<table class="table table-striped table-hover ">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Quiz Name</th>
+    <th>Play Quiz</th>
+    <% if current_user.admin? %>
+        <th>Add Question</th>
+        <th>Delete></th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <%= ctr = 0 %>
+  <% @quizzes.each do |quiz| %>
+      <tr>
+        <td><%= ctr + 1 %></td>
+        <td><%=	quiz.name %></td>
+        <td><%=	link_to "Play Quiz", play_path(quiz.id) %></td>
+        <% if current_user.admin? %>
+            <td><%=	 link_to "Add Question", new_question_path %></td>
+            <td><%=	 link_to "Delete", quiz, method: :delete, data: { confirm: "Are you sure?" } %></td>
+        <% end %>
+      </tr>
+      <%=	 ctr = ctr + 1 %>
+  <% end %>
+  </tbody>
+</table>
